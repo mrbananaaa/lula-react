@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-poppins cursor-default
+  }
+
+  body {
+    @apply bg-our-dark text-white selection:bg-white selection:text-our-dark
+  }
+}
+
+@layer components {
+  .button {
+    @apply border-2 border-white bg-white text-our-dark rounded-md hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] transition-all duration-300;
+  }
+
+  .sec-button {
+    @apply border-2 border-white rounded-md hover:bg-white hover:text-our-dark transition-all duration-300 select-none;
+  }
+}
