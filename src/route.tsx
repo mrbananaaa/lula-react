@@ -1,33 +1,64 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import Layout from "./components/Layout";
-import HomePage from "./routes";
+import LoadingPage from "./components/LoadingPage";
 
-const ComingSoonPage = ({
-  name = "page"
-}: {
-  name: string
-}) => {
-  return (
-    <div className="min-h-screen flex justify-center items-center">
-      <div>
-        <div>{name} page is</div>
-        <div className="text-6xl font-semibold">Coming Soon!</div>
-      </div>
-    </div>
-  );
-};
+const HomePage = lazy(() => import("./routes"));
+const ComingSoonPage = lazy(() => import("./components/ComingSoonPage"));
 
 const RouteProvider = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/about" element={<ComingSoonPage name="About" />} />
-          <Route path="/shop" element={<ComingSoonPage name="Shop" />} />
-          <Route path="/blog" element={<ComingSoonPage name="Blog" />} />
-          <Route path="/shipping" element={<ComingSoonPage name="Shipping" />} />
-          <Route path="/signin" element={<ComingSoonPage name="Signin" />} />
+          <Route
+            index
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <ComingSoonPage name="About" />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/shop"
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <ComingSoonPage name="Shop" />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <ComingSoonPage name="Blog" />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/shipping"
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <ComingSoonPage name="Shipping" />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/signin"
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <ComingSoonPage name="Signin" />
+              </Suspense>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
